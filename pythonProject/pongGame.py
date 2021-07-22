@@ -30,8 +30,8 @@ ball.speed(0)
 ball.shape("square")
 ball.color("white")
 ball.penup()
-ball.dx = 0.10
-ball.dy = -0.10
+ball.dx = 0.20
+ball.dy = 0.20
 
 #paddle moving
 def paddle1_up():
@@ -72,15 +72,30 @@ while True:
     ball.sety(ball.ycor() + ball.dy)
 
     #border checking
-    if ball.ycor() > 300:
-        ball.sety(300)
+    if ball.ycor() > 290:
+        ball.sety(290)
         ball.dy *= -1
-    if ball.ycor() < -300:
-        ball.sety(-300)
+
+    if ball.ycor() < -290:
+        ball.sety(-290)
         ball.dy *= -1
 
     if ball.xcor() > 400:
         ball.setx(400)
-        window.reset()
+        ball.goto(0,0)
+        ball.dx *= -1
+
+    if ball.xcor() < -400:
+        ball.setx(-400)
+        ball.goto(0,0)
+        ball.dx *= -1
+
+    #touching paddles
+    if ball.xcor() < -340 and ball.ycor() < paddle1.ycor() + 50 and ball.ycor() > paddle1.ycor() - 50:
+        ball.dx *= -1
+
+    elif ball.xcor() > 340 and ball.ycor() < paddle2.ycor() + 50 and ball.ycor() > paddle2.ycor() - 50:
+        ball.dx *= -1
+
 
 
