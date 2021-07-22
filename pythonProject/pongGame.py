@@ -33,6 +33,19 @@ ball.penup()
 ball.dx = 0.20
 ball.dy = 0.20
 
+paddle1_score = 0
+paddle2_score = 0
+#score
+score = turtle.Turtle()
+score.speed(0)
+score.hideturtle()
+score.color("white")
+score.penup()
+score.goto(0,250)
+score.write("Left: 0  Right: 0 ", align="center", font=("Courier", 24, "normal"))
+
+
+
 #paddle moving
 def paddle1_up():
     y = paddle1.ycor()#it gives y cordinate
@@ -84,11 +97,18 @@ while True:
         ball.setx(400)
         ball.goto(0,0)
         ball.dx *= -1
+        paddle1_score +=1
+        score.clear()
+        score.write("Left: {}  Right: {} ".format(paddle1_score, paddle2_score), align="center", font=("Courier", 24, "normal"))
 
     if ball.xcor() < -400:
         ball.setx(-400)
         ball.goto(0,0)
         ball.dx *= -1
+        paddle2_score +=1
+        score.clear()
+        score.write("Left: {}  Right: {} ".format(paddle1_score, paddle2_score), align="center",
+                    font=("Courier", 24, "normal"))
 
     #touching paddles
     if ball.xcor() < -340 and ball.ycor() < paddle1.ycor() + 50 and ball.ycor() > paddle1.ycor() - 50:
